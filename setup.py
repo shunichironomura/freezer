@@ -21,6 +21,7 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     url='https://github.com/shunichironomura/freezer',
+    download_url='https://github.com/shunichironomura/object-freezer/archive/v0.1.0.tar.gz',
     license='MIT',
     packages=find_packages(exclude=('tests', 'docs')),
     test_suite='tests',
