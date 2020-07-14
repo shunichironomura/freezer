@@ -105,4 +105,6 @@ False
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
-<!-- ## TO-DO's -->
+## TO-DO's
+
+- [] Test against various Python versions.
