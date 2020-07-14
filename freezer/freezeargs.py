@@ -3,6 +3,10 @@
 import functools
 from .core import freeze
 
+__all__ = [
+    'freezeargs'
+]
+
 def freezeargs(func):
     '''
     Transform mutable arguments into immutable.
