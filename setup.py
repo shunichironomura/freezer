@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='object-freezer',
-    version='0.0.1',
+    version='0.1.0',
     description='Python module for freezing objects',
     author='Shunichiro Nomura',
     author_email='nomura@space.t.u-tokyo.ac.jp',
