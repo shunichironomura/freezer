@@ -1,4 +1,4 @@
-# Code from https://stackoverflow.com/questions/6358481/using-functools-lru-cache-with-dictionary-arguments/53394430#53394430
+# Based on  https://stackoverflow.com/questions/6358481/using-functools-lru-cache-with-dictionary-arguments/53394430#53394430
 
 import functools
 from .core import freeze

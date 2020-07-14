@@ -4,8 +4,8 @@ import numpy as np
 from functools import lru_cache
 from unittest.mock import Mock
 
-from freezer.core import *
-from freezer.freezeargs import freezeargs
+from object_freezer.core import *
+from object_freezer.freezeargs import freezeargs
 
 
 class TestCore(unittest.TestCase):

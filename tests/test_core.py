@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from freezer.core import *
+from object_freezer.core import *
 
 class TestCore(unittest.TestCase):
     @classmethod

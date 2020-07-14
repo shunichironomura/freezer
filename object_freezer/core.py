@@ -81,15 +81,15 @@ def freeze(obj, custom_conversions=None):
     return ret
 
 
+# Implementation of deepfrozendict is based on frozendict:
+# https://github.com/slezica/python-frozendict
 
 try:
     from collections import OrderedDict
 except ImportError:  # python < 2.7
     OrderedDict = NotImplemented
 
-
 iteritems = getattr(dict, 'iteritems', dict.items) # py2-3 compatibility
-
 
 class deepfrozendict(collections.Mapping):
     """

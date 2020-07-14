@@ -7,14 +7,12 @@ def readme():
 
 
 setup(
-    name='freezer',
+    name='object-freezer',
     version='0.0.1',
     description='Python module for freezing objects',
     author='Shunichiro Nomura',
     author_email='nomura@space.t.u-tokyo.ac.jp',
-    install_requires=[
-        'frozendict'
-    ],
+    install_requires=[],
     url='https://github.com/shunichironomura/freezer',
     license='MIT',
     packages=find_packages(exclude=('tests', 'docs')),
