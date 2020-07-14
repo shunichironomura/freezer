@@ -4,9 +4,7 @@ import numpy as np
 from functools import lru_cache
 from unittest.mock import Mock
 
-from object_freezer.core import *
-from object_freezer.freezeargs import freezeargs
-
+import object_freezer as of
 
 class TestCore(unittest.TestCase):
     @classmethod
@@ -28,18 +26,18 @@ class TestCore(unittest.TestCase):
         pass
 
     def test_freezeargs_set(self):
-        @freezeargs
+        @of.freezeargs
         def func(s):
-            return ishashable(s)
+            return of.ishashable(s)
 
         s = {1, 2}
-        self.assertFalse(ishashable(s))
+        self.assertFalse(of.ishashable(s))
         self.assertTrue(func(s))
 
     def test_freezeargs_dict_with_unhashable(self):
-        @freezeargs
+        @of.freezeargs
         def func(d):
-            return ishashable(d)
+            return of.ishashable(d)
 
         d = {1: [2, 3]}
         self.assertTrue(func(d))
@@ -47,11 +45,11 @@ class TestCore(unittest.TestCase):
     def test_freezeargs_with_lru_cache(self):
         mock = Mock() # for call counting
 
-        @freezeargs
+        @of.freezeargs
         @lru_cache(maxsize=None)
         def func(d, s):
             mock()
-            return ishashable(d) and ishashable(s)
+            return of.ishashable(d) and of.ishashable(s)
 
         d = {1: [2, 3]}
         s = {1, 2}
