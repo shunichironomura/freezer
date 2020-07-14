@@ -4,9 +4,7 @@ Python module for freezing objects.
 ## Installation
 
 ```
-git clone https://github.com/shunichironomura/object-freezer.git
-cd object-freezer
-python setup.py install
+$ pip install object-freezer
 ```
 
 Then import this module as:
