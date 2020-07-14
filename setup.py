@@ -8,8 +8,10 @@ def readme():
 
 setup(
     name='object-freezer',
-    version='0.1.0',
+    version='0.1.1',
     description='Python module for freezing objects',
+    long_description=readme(),
+    long_description_content_type='text/markdown',
     author='Shunichiro Nomura',
     author_email='nomura@space.t.u-tokyo.ac.jp',
     install_requires=[],
@@ -21,7 +23,7 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     url='https://github.com/shunichironomura/freezer',
-    download_url='https://github.com/shunichironomura/object-freezer/archive/v0.1.0.tar.gz',
+    download_url='https://github.com/shunichironomura/object-freezer/archive/v0.1.1.tar.gz',
     license='MIT',
     packages=find_packages(exclude=('tests', 'docs')),
     test_suite='tests',
