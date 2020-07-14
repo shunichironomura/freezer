@@ -1,7 +1,4 @@
 import collections
-import operator
-import functools
-import sys
 
 __all__ = [
     'ishashable',
