@@ -105,4 +105,4 @@ False
 
 ## TO-DO's
 
-- [] Test against various Python versions.
+- [ ] Test against various Python versions.
