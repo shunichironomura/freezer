@@ -66,7 +66,7 @@ def freeze(obj, custom_conversions=None):
     elif isinstance(obj, dict):
         ret = deepfrozendict(obj, custom_conversions=custom_conversions)
     elif isinstance(obj, (list, tuple)):
-        ret = tuple(freeze(e) for e in obj)
+        ret = tuple(freeze(e, custom_conversions=custom_conversions) for e in obj)
     elif custom_conversions is not None:
         for otype, conv in custom_conversions.items():
             if isinstance(obj, otype):
