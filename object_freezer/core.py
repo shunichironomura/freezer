@@ -130,12 +130,7 @@ class deepfrozendict(collections.Mapping):
         return '<%s %r>' % (self.__class__.__name__, self._dict)
 
     def __hash__(self):
-        if self._hash is None:
-            h = 0
-            for key, value in iteritems(self._dict):
-                h ^= hash((key, value))
-            self._hash = h
-        return self._hash
+        return hash(tuple((key, value) for key, value in self._dict.items()))
 
 
 class FrozenOrderedDict(deepfrozendict):
