@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='object-freezer',
-    version='0.1.1',
+    version='0.1.2',
     description='Python module for freezing objects',
     long_description=readme(),
     long_description_content_type='text/markdown',
