@@ -14,6 +14,9 @@ import object_freezer as of
 ```
 
 ## Examples
+
+### Freezing objects
+
 A list is frozen into a tuple:
 
 ```python
@@ -75,6 +78,21 @@ TypeError: unhashable type: 'dict'
 >>> fd
 <deepfrozendict {'a': ('A', 0), 'b': <deepfrozendict {'B': 1}>}>
 ```
+
+### Freezing function arguments using `of.freezeargs` decorator
+
+Function arguments can be frozen by using `of.freezeargs` decorator. This is useful for function memoization.
+
+```python
+from functools import lru_cache
+
+@of.freezeargs
+@lru_cache(maxsize=128)
+def some_heavy_computation(list_, dict_, set_):
+    '''Some heavy computation.'''
+```
+
+Note that `list_`, `dict_`, and `set_` given to `some_heavy_computation` are frozen objects.
 
 ## Known issues & notes
 
