@@ -85,6 +85,7 @@ def freeze(obj, custom_conversions=None):
     else:
         raise NotFreezableError('Freezing method for object {} is not defined.'.format(repr(obj)))
 
+    # TODO: Remove this section if it takes too long
     if not ishashable(ret):
         raise NotFreezableError('Object {} cannot be converted to a hashable.'.format(repr(ret)))
 
