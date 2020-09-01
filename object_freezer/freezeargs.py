@@ -10,7 +10,7 @@ __all__ = [
 def freezeargs(func):
     '''
     Transform mutable arguments into immutable.
-    Useful to be compatible with cache
+    Useful to be compatible with lru_cache
     '''
 
     @functools.wraps(func)
