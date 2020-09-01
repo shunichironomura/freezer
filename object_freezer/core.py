@@ -1,13 +1,20 @@
 import collections
+try:
+    import numpy as np
+except ImportError:
+    _numpy_is_imported = False
+else:
+    _numpy_is_imported = True
 
 __all__ = [
+    'NotFreezableError',
     'ishashable',
     'freeze',
     'unfreeze',
     'deepfrozendict'
 ]
 
-class UnhashableError(Exception):
+class NotFreezableError(Exception):
     def __init__(self, msg):
         self.msg = msg
 
@@ -59,25 +66,27 @@ def freeze(obj, custom_conversions=None):
     - list -> tuple
     - dict -> deepfrozendict
     '''
-    if ishashable(obj):
+    # TODO: Prioritize custom_coversion
+    # TODO: Add np.ndarray conversion to default
+    if custom_conversions is not None:
+        for otype, conv in custom_conversions.items():
+            if isinstance(obj, otype):
+                ret = conv(obj)
+                break
+    elif ishashable(obj):
         ret = obj
     elif isinstance(obj, set):
         # Elements in a set are guaranteed to be hashable.
         ret = frozenset(obj)
     elif isinstance(obj, dict):
         ret = deepfrozendict(obj, custom_conversions=custom_conversions)
-    elif isinstance(obj, (list, tuple)):
+    elif isinstance(obj, (list, tuple)) or (_numpy_is_imported and isinstance(obj, np.ndarray)):
         ret = tuple(freeze(e, custom_conversions=custom_conversions) for e in obj)
-    elif custom_conversions is not None:
-        for otype, conv in custom_conversions.items():
-            if isinstance(obj, otype):
-                ret = conv(obj)
-                break
     else:
-        raise UnhashableError('Object {} cannot be converted to a hashable.'.format(repr(obj)))
+        raise NotFreezableError('Freezing method for object {} is not defined.'.format(repr(obj)))
 
     if not ishashable(ret):
-        raise UnhashableError('Object {} cannot be converted to a hashable.'.format(repr(ret)))
+        raise NotFreezableError('Object {} cannot be converted to a hashable.'.format(repr(ret)))
 
     return ret
 
