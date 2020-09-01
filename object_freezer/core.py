@@ -3,6 +3,7 @@ import collections
 __all__ = [
     'ishashable',
     'freeze',
+    'unfreeze',
     'deepfrozendict'
 ]
 
@@ -79,6 +80,37 @@ def freeze(obj, custom_conversions=None):
         raise UnhashableError('Object {} cannot be converted to a hashable.'.format(repr(ret)))
 
     return ret
+
+def unfreeze(frozen_obj, original_obj_like, custom_conversions_inv=None):
+    if ishashable(original_obj_like):
+        ret = frozen_obj
+    elif isinstance(original_obj_like, set):
+        # Elements in a set are guaranteed to be hashable.
+        # ret = frozenset(original_obj_like)
+        ret = set(frozen_obj)
+    elif isinstance(original_obj_like, dict):
+        # ret = deepfrozendict(original_obj_like, custom_conversions_inv=custom_conversions_inv)
+        ret = {k: unfreeze(v, original_obj_like[k], custom_conversions_inv=custom_conversions_inv) for k, v in frozen_obj.items()}
+    elif isinstance(original_obj_like, (list, tuple)):
+        # ret = tuple(freeze(e, custom_conversions_inv=custom_conversions_inv) for e in obj)
+        ret = [unfreeze(e, e_like, custom_conversions_inv=custom_conversions_inv) for e, e_like in zip(frozen_obj, original_obj_like)]
+        if isinstance(original_obj_like, tuple):
+            ret = tuple(ret)
+    elif custom_conversions_inv is not None:
+        for otype, conv in custom_conversions_inv.items():
+            if isinstance(original_obj_like, otype):
+                ret = conv(frozen_obj)
+                # ret = conv(obj)
+
+                break
+    else:
+        raise UnhashableError('Object {} cannot be converted to a hashable.'.format(repr(original_obj_like)))
+
+    # if not ishashable(ret):
+    #     raise UnhashableError('Object {} cannot be converted to a hashable.'.format(repr(ret)))
+
+    return ret
+
 
 
 # Implementation of deepfrozendict is based on frozendict:
