@@ -27,4 +27,5 @@ setup(
     license='MIT',
     packages=find_packages(exclude=('tests', 'docs')),
     test_suite='tests',
-    zip_safe=False)
+    zip_safe=False
+)
